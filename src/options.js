@@ -1,17 +1,20 @@
 const inquirer = require('inquirer');
 let optionsArr = [{
+    type: 'list',
     name: "type",
-    message: "你想创建一个什么类型得模板(vue|react|ssr)",
+    message: "请选择你想创建的模板类型(vue or react)",
+    choices: [
+        "vue",
+        "react"
+    ],
     default: 'vue'
-},
-    {
-        name: "tem",
-        message: "你想创建一个什么样得项目('空模板：template|后台管理系统：adminTemplate')",
-        default: 'template'
-    }
-];
+}];
 
 module.exports = () => {
-    return inquirer
-        .prompt(optionsArr)
+    return new Promise((resolve)=>{
+        inquirer
+            .prompt(optionsArr).then(answers=>{
+            resolve(answers);
+        })
+    });
 };
